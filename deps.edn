@@ -1,3 +1,5 @@
-{:deps {}
- :paths ["src"]
+{:deps       {org.clojure/clojure {:mvn/version "1.10.3"}
+              nrepl/nrepl         {:mvn/version "0.8.3"}}
+ :paths      ["src" "resources"]
+ :test-paths ["test" "test-resources"]
  }

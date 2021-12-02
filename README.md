@@ -3,8 +3,9 @@
 [Advent of Code 2021](https://adventofcode.com)
 
 ## Contents
-- [Day 1-1](src/day_01_01.clj)
-- [Day 1-2](src/day_01_02.clj)
+
+- [Day 1](src/day_01.clj)
+- [Day 2](src/day_02.clj)
 
 ## License
 
