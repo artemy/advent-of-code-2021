@@ -1,4 +1,4 @@
-(ns day_02_test
+(ns day_02-test
   (:require [clojure.test :refer [deftest is]]
             [utils :refer :all]
             [day_02 :refer [part-02]]))
