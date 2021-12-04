@@ -1,11 +1,9 @@
 (ns day_02
-  (:require [clojure.string :as str]
-            [utils :refer :all]))
+  (:require [utils :refer :all]))
 
 (def input-file "day_02.txt")
 
-(def data (let [split-whitespace #(str/split % #"\s")]
-            (->> input-file open-resource (map split-whitespace) (map #(assoc % 1 (Integer/parseInt (second %)))))))
+(def data (->> input-file open-resource (map split-whitespace) (map #(assoc % 1 (Integer/parseInt (second %))))))
 
 (defn part-01 [input]
   (let [values-reducer (fn [[horizontal depth] [command value]]

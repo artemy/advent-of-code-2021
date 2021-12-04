@@ -1,6 +1,6 @@
 (ns utils
   (:require [clojure.java.io :as io]
-            [clojure.string :refer [split-lines]]))
+            [clojure.string :refer [split-lines split]]))
 
 (defn open-resource [input-file]
   (let [data-file (io/resource input-file)]
@@ -16,3 +16,5 @@
 (defn parse-binary-int [v] (Integer/parseInt v 2))
 
 (defn transpose [input] (apply map list input))
+
+(defn split-whitespace [v] (split v #"\s+"))
