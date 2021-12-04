@@ -19,37 +19,34 @@
                                       (map parse-int)))
                            (partition 5))}))
 
+(defn all-marked? [v] (every? #(= "x" %) v))
+(defn replace-number [v x] (map (fn [y] (map #(if (= % x) "x" %) y)) v))
+(defn mark-number [v x] (map #(replace-number % x) v))
+(defn winning-board? [b] (let [transposed (transpose b)]
+                           (or
+                             (some #(all-marked? %) b)
+                             (some #(all-marked? %) transposed))))
+(defn sum-remaining [b] (->> b flatten (remove #(= "x" %)) (reduce +)))
 
 (defn part-01 [input]
   (loop [boards (:boards input) numbers (:numbers input)]
-    (let [current-number (first numbers)
-          remaining-numbers (rest numbers)
-          replace-number (fn [v x] (map (fn [y] (map #(if (= % x) "x" %) y)) v))
-          current-boards (map #(replace-number % current-number) boards)
-          all-marked? (fn [v] (every? #(= "x" %) v))
-          winning-board? (fn [b] (let [transposed (transpose b)]
-                                   (or
-                                     (some #(all-marked? %) b)
-                                     (some #(all-marked? %) transposed))))
-          empty-boards (filter winning-board? current-boards)]
-      (if (empty? empty-boards)
-        (recur current-boards remaining-numbers)
-        (* (->> empty-boards flatten (remove #(= "x" %)) (reduce +)) current-number)))))
+    (let [[current-number & remaining-numbers] numbers
+          updated-boards (mark-number boards current-number)
+          winning-boards (filter winning-board? updated-boards)]
+      (if (empty? winning-boards)
+        (recur updated-boards remaining-numbers)
+        (* (sum-remaining winning-boards) current-number)))))
+
+
 
 (defn part-02 [input]
   (loop [boards (:boards input) numbers (:numbers input)]
-    (let [current-number (first numbers)
-          remaining-numbers (rest numbers)
-          replace-number (fn [v x] (map (fn [y] (map #(if (= % x) "x" %) y)) v))
-          current-boards (map #(replace-number % current-number) boards)
-          all-marked? (fn [v] (every? #(= "x" %) v))
-          winning-board? (fn [b] (let [transposed (transpose b)]
-                                   (or
-                                     (some #(all-marked? %) b)
-                                     (some #(all-marked? %) transposed))))]
-      (if (and (= (count current-boards) 1))
-        (* (->> current-boards flatten (remove #(= "x" %)) (reduce +)) current-number)
-        (recur (remove winning-board? current-boards) remaining-numbers)))))
+    (let [[current-number & remaining-numbers] numbers
+          updated-boards (mark-number boards current-number)
+          boards-yet-to-win (remove winning-board? updated-boards)]
+      (if (empty? boards-yet-to-win)
+        (* (sum-remaining updated-boards) current-number)
+        (recur boards-yet-to-win remaining-numbers)))))
 
 (defn -main [& _]
   (println "Part 1: " (part-01 data))
