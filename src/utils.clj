@@ -18,3 +18,7 @@
 (defn transpose [input] (apply map list input))
 
 (defn split-whitespace [v] (split v #"\s+"))
+
+(defn get-or-default [m k d] (or (get m k) d))
+(defn map-vals [f m] (into {} (for [[k v] m] [k (f v)])))
+(defn map-keys [f m] (into {} (for [[k v] m] [(f k) v])))
