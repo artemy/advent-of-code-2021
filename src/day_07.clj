@@ -23,7 +23,8 @@
     (find-min-fuel-consumption delta-calculator input)))
 
 (defn part-02 [input]
-  (let [delta-calculator (fn [x d] (->> (- x d) abs inc (range 1) (reduce +)))]
+  (let [calculate-fuel-cost (fn [x] (/ (* x (+ x 1)) 2))
+        delta-calculator (fn [x d] (->> (- x d) abs calculate-fuel-cost))]
     (find-min-fuel-consumption delta-calculator input)))
 
 (defn -main [& _]
