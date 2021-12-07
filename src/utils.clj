@@ -12,6 +12,7 @@
   fsecond [x] (-> x second first))
 
 (defn parse-int [v] (Integer/parseInt v 10))
+(defn abs [x] (Math/abs ^int x))
 
 (defn parse-binary-int [v] (Integer/parseInt v 2))
 
