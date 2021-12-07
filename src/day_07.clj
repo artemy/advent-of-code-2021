@@ -7,21 +7,24 @@
 (def data (let [split-by-comma #(str/split % #",")]
             (->> input-file open-resource first split-by-comma (map parse-int))))
 
-(defn find-fuel-consumptions [f v]
+(defn calculate-fuel-consumptions [f v]
   (loop [delta (- (apply max v) (apply min v))
          fuel []]
-    (if (> delta 0)
-      (recur (dec delta) (conj fuel (reduce + (map #(f % delta) v))))
-      fuel)))
+    (let [find-delta (fn [x] (f x delta))]
+      (if (> delta 0)
+        (recur (dec delta) (->> v (map find-delta) (reduce +) (conj fuel)))
+        fuel))))
+
+(defn find-min-fuel-consumption [f v]
+  (->> v (calculate-fuel-consumptions f) (apply min)))
 
 (defn part-01 [input]
-  (let [get-delta (fn [x d] (abs (- x d)))]
-    (->> input (find-fuel-consumptions get-delta) (apply min))))
+  (let [delta-calculator (fn [x d] (abs (- x d)))]
+    (find-min-fuel-consumption delta-calculator input)))
 
 (defn part-02 [input]
-  (let [get-delta (fn [x d] (reduce + (range 1 (inc (abs (- x d))))))
-        ]
-    (->> input (find-fuel-consumptions get-delta) (apply min))))
+  (let [delta-calculator (fn [x d] (->> (- x d) abs inc (range 1) (reduce +)))]
+    (find-min-fuel-consumption delta-calculator input)))
 
 (defn -main [& _]
   (println "Part 1: " (part-01 data))
