@@ -22,7 +22,7 @@
           has-one? (fn [i d] (and (not (contains? d 2)) (has-length? i 2)))
           has-seven? (fn [i d] (and (not (contains? d 7)) (has-length? i 3)))
           has-four? (fn [i d] (and (not (contains? d 4)) (has-length? i 4)))
-          has-eight? (fn [_ d] (and (not (contains? d 8))))
+          has-eight? (fn [i d] (and (not (contains? d 8)) (has-length? i 7)))
           has-three? (fn [i d] (and (not (contains? d 3)) (has-length? i 5) (contains? d 7)))
           has-nine? (fn [i d] (and (not (contains? d 9)) (has-length? i 6) (contains? d 4)))
           has-zero? (fn [i d] (and (not (contains? d 0)) (has-length? i 6) (contains? d 7)))
@@ -42,7 +42,7 @@
         (has-seven? in deduced) (let [a (find-first-by-size 3)]
                                   (recur (remove #{a} in) (merge deduced {7 a})))
         ; 8
-        (has-eight? in deduced) (let [a ((fnil identity "abcdefg") (find-first-by-size 7))]
+        (has-eight? in deduced) (let [a (find-first-by-size 7)]
                                   (recur (remove #{a} in) (merge deduced {8 a})))
         ; 9
         (has-nine? in deduced) (let [nine-filter (fn [x] (contains-all? x (get deduced 4)))
