@@ -18,5 +18,6 @@
     (->> input threes (map sums) pairs (map differences) (filter neg?) count)))
 
 (defn -main [& _]
-  (println "Part 1: " (part-01 data))
-  (println "Part 2: " (part-02 data)))
+  (println "Day 01:")
+  (println "\t -> Part 1: " (part-01 data))
+  (println "\t -> Part 2: " (part-02 data)))

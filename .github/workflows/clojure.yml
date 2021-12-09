@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Prepare java
@@ -24,3 +22,5 @@ jobs:
         cli: 1.10.3.1040
     - name: Run tests
       run: clojure -X:test
+    - name: Run solutions
+      run: for f in src/day*; do clojure -X "${$(basename -- $f)%.*}/-main" ; done

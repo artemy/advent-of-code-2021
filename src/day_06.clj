@@ -25,5 +25,6 @@
           (->> updated-fish vals (reduce +)))))))
 
 (defn -main [& _]
-  (println "Part 1: " (part-01 data 80))
-  (println "Part 2: " (part-01 data 256)))
+  (println "Day 06:")
+  (println "\t -> Part 1: " (part-01 data 80))
+  (println "\t -> Part 2: " (part-01 data 256)))

@@ -45,5 +45,6 @@
   (->> input prepare-data find-basins (map count) sort (take-last 3) (reduce *)))
 
 (defn -main [& _]
-  (println "Part 1: " (part-01 data))
-  (println "Part 2: " (part-02 data)))
+  (println "Day 09:")
+  (println "\t -> Part 1: " (part-01 data))
+  (println "\t -> Part 2: " (part-02 data)))
