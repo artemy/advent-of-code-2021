@@ -22,5 +22,3 @@ jobs:
         cli: 1.10.3.1040
     - name: Run tests
       run: clojure -X:test
-    - name: Run solutions
-      run: for f in src/day*; do clojure -X "${$(basename -- $f)%.*}/-main" ; done
