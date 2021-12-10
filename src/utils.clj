@@ -23,3 +23,5 @@
 (defn get-or-default [m k d] (or (get m k) d))
 (defn map-vals [f m] (into {} (for [[k v] m] [k (f v)])))
 (defn map-keys [f m] (into {} (for [[k v] m] [(f k) v])))
+
+(defn find-middle [v] (nth v (-> v count (quot 2))))
