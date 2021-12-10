@@ -1,6 +1,6 @@
 (ns day_05
-  (:require [utils :refer :all]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [utils :refer [open-resource parse-int]]))
 
 (def input-file "day_05.txt")
 
@@ -47,5 +47,5 @@
 
 (defn -main [& _]
   (println "Day 05:")
-  (println "\t -> Part 1: " (part-01 data))
-  (println "\t -> Part 2: " (part-02 data)))
+  (println "\t-> Part 1: " (part-01 data))
+  (println "\t-> Part 2: " (part-02 data)))

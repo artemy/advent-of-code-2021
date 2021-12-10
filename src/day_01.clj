@@ -1,5 +1,5 @@
 (ns day_01
-  (:require [utils :refer :all]))
+  (:require [utils :refer [open-resource]]))
 
 (def input-file "day_01.txt")
 
@@ -19,5 +19,5 @@
 
 (defn -main [& _]
   (println "Day 01:")
-  (println "\t -> Part 1: " (part-01 data))
-  (println "\t -> Part 2: " (part-02 data)))
+  (println "\t-> Part 1: " (part-01 data))
+  (println "\t-> Part 2: " (part-02 data)))

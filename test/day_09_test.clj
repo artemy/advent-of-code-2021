@@ -1,13 +1,12 @@
 (ns day_09-test
   (:require [clojure.test :refer [deftest is]]
-            [utils :refer :all]
             [day_09 :refer [part-01 part-02]]))
 
-(def test-data '("2199943210"
-"3987894921"
-"9856789892"
-"8767896789"
-"9899965678"))
+(def test-data ["2199943210"
+                "3987894921"
+                "9856789892"
+                "8767896789"
+                "9899965678"])
 
 (deftest part-01-test
   (let [expected 15]

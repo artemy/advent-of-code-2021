@@ -1,9 +1,9 @@
 (ns day_02
-  (:require [utils :refer :all]))
+  (:require [utils :refer [open-resource parse-int split-whitespace]]))
 
 (def input-file "day_02.txt")
 
-(def data (->> input-file open-resource (map split-whitespace) (map #(assoc % 1 (Integer/parseInt (second %))))))
+(def data (->> input-file open-resource (map split-whitespace) (map #(assoc % 1 (parse-int (second %))))))
 
 (defn part-01 [input]
   (let [values-reducer (fn [[horizontal depth] [command value]]
@@ -26,5 +26,5 @@
 
 (defn -main [& _]
   (println "Day 02:")
-  (println "\t -> Part 1: " (part-01 data))
-  (println "\t -> Part 2: " (part-02 data)))
+  (println "\t-> Part 1: " (part-01 data))
+  (println "\t-> Part 2: " (part-02 data)))

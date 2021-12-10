@@ -1,6 +1,6 @@
 (ns day_03
   (:require [clojure.string :as str]
-            [utils :refer :all]))
+            [utils :refer [fsecond open-resource parse-binary-int parse-int transpose]]))
 
 (def input-file "day_03.txt")
 
@@ -51,5 +51,5 @@
 
 (defn -main [& _]
   (println "Day 03:")
-  (println "\t -> Part 1: " (part-01 data))
-  (println "\t -> Part 2: " (part-02 data)))
+  (println "\t-> Part 1: " (part-01 data))
+  (println "\t-> Part 2: " (part-02 data)))

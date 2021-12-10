@@ -1,6 +1,5 @@
  (ns day_06-test
   (:require [clojure.test :refer [deftest is]]
-            [utils :refer :all]
             [day_06 :refer [part-01]]))
 
 (def test-data '(3 4 3 1 2))
