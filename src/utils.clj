@@ -24,3 +24,5 @@
 (defn map-keys [f m] (into {} (for [[k v] m] [(f k) v])))
 
 (defn find-middle [v] (nth v (-> v count (quot 2))))
+
+(defn flatten-first [v] (mapcat identity v))

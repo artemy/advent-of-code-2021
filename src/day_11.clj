@@ -1,6 +1,6 @@
 (ns day_11
   (:require [clojure.string :as str]
-            [utils :refer [open-resource]]))
+            [utils :refer [flatten-first open-resource]]))
 
 (def input-file "day_11.txt")
 
@@ -21,19 +21,22 @@
   [coordinate-map]
   #(select-keys coordinate-map (map (fn [x] (map + x %)) adjacent-coord-modifiers)))
 
-(defn increase-levels [v] (->> v (map #(vector (first %) (-> % second inc))) (into {})))
+(defn increase-all-levels [v] (->> v (map #(vector (first %) (-> % second inc))) (into {})))
 
 (defn single-step [v]
   (loop [levels v
          flashed {}]
-    (let [nines-filter (fn [v] (filter #(< 9 (second %)) v))
-          nines (->> levels nines-filter (remove #(contains? flashed (first %))) (into {}))
-          reset-to-zero (fn [v] (->> v (map (fn [[k v]] (if (< 9 v) [k 0] [k v]))) (into {})))]
-      (if (empty? nines)
-        [(reset-to-zero levels) (count flashed)]
-        (let [adjacent (->> nines (map #(->> % first ((find-nearest-points levels)) (map first))) (mapcat identity))
-              update-by-flash (reduce (fn [p n] (if (contains? p n) (update p n inc) p)) levels adjacent)]
-          (recur update-by-flash (merge flashed nines))))
+    (let [greater-than-nine? (fn [x] (->> x second (< 9)))
+          has-flashed? (fn [x] (contains? flashed (first x)))
+          flashing (->> levels (filter greater-than-nine?) (remove has-flashed?))
+          reset-flashed (fn [[k v]] (if (< 9 v) [k 0] [k v]))]
+      (if (empty? flashing)
+        [(->> levels (map reset-flashed)) (count flashed)]
+        (let [adjacent-to-flashed (->> flashing (map first) (map #((find-nearest-points levels) %)) flatten-first (map first))
+              increase-if-adjacent (fn [v c] (if (contains? v c)
+                                               (update v c inc)
+                                               v))]
+          (recur (reduce increase-if-adjacent levels adjacent-to-flashed) (merge flashed flashing))))
       )))
 
 (defn count-flashes [steps input]
@@ -42,19 +45,21 @@
                                     flashes 0]
                                (if (>= step n)
                                  [levels flashes]
-                                 (let [next-step-levels (single-step (increase-levels levels))]
-                                   (recur (first next-step-levels) (inc step) (+ flashes (second next-step-levels)))))))]
+                                 (let [next-step-levels (-> levels increase-all-levels single-step)]
+                                   (recur (first next-step-levels)
+                                          (inc step)
+                                          (->> next-step-levels second (+ flashes)))))))]
     (-> input (loop-steps steps) second)))
 
 (defn find-first-synchronized [input]
-  (let [
-        steps (fn [v] (loop [levels v
-                             step 0]
-                        (if (every? (fn [[_ v]] (= v 0)) levels)
-                          [levels step]
-                          (let [next-step-levels (single-step (increase-levels levels))]
-                            (recur (first next-step-levels) (inc step))))))]
-    (-> input steps second)))
+  (let [loop-steps (fn [v] (loop [levels v
+                                  step 0]
+                             (if (every? (fn [[_ v]] (= v 0)) levels)
+                               [levels step]
+                               (let [next-step-levels (-> levels increase-all-levels single-step)]
+                                 (recur (first next-step-levels)
+                                        (inc step))))))]
+    (-> input loop-steps second)))
 
 (defn part-01 [input steps]
   (->> input prepare-data (count-flashes steps)))

@@ -1,6 +1,6 @@
 (ns day_05
   (:require [clojure.string :as str]
-            [utils :refer [open-resource parse-int]]))
+            [utils :refer [flatten-first open-resource parse-int]]))
 
 (def input-file "day_05.txt")
 
@@ -18,7 +18,6 @@
               dec
               inc) e)
            (if reversed? -1 1))))
-(defn flatten-first [v] (mapcat identity v))
 
 (defn create-lines [[[x1 y1] [x2 y2]]]
   (let [xs (inclusive-range x1 x2)
