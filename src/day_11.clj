@@ -68,6 +68,6 @@
   (->> input prepare-data find-first-synchronized))
 
 (defn -main [& _]
-  (println "Day 09:")
+  (println "Day 11:")
   (println "\t-> Part 1: " (part-01 data 100))
   (println "\t-> Part 2: " (part-02 data)))

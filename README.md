@@ -15,6 +15,7 @@
 - [Day 9](src/day_09.clj)
 - [Day 10](src/day_10.clj)
 - [Day 11](src/day_11.clj)
+- [Day 12](src/day_12.clj)
 
 ## License
 
