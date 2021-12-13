@@ -1,11 +1,10 @@
 (ns day_05
   (:require [clojure.string :as str]
-            [utils :refer [flatten-first open-resource parse-int]]))
+            [utils :refer [flatten-first open-resource parse-int split-by-comma]]))
 
 (def input-file "day_05.txt")
 
-(def data (let [split-by-arrow #(str/split % #"\s->\s")
-                split-by-comma #(str/split % #",")]
+(def data (let [split-by-arrow #(str/split % #"\s->\s")]
             (->> input-file
                  open-resource
                  (map split-by-arrow)

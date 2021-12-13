@@ -1,11 +1,9 @@
 (ns day_07
-  (:require [clojure.string :as str]
-            [utils :refer [abs open-resource parse-int]]))
+  (:require [utils :refer [abs open-resource parse-int split-by-comma]]))
 
 (def input-file "day_07.txt")
 
-(def data (let [split-by-comma #(str/split % #",")]
-            (->> input-file open-resource first split-by-comma (map parse-int))))
+(def data (->> input-file open-resource first split-by-comma (map parse-int)))
 
 (defn calculate-fuel-consumptions [f v]
   (loop [delta (- (apply max v) (apply min v))

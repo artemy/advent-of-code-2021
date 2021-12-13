@@ -1,11 +1,10 @@
 (ns day_04
   (:require [clojure.string :as str]
-            [utils :refer [open-resource parse-int split-whitespace transpose]]))
+            [utils :refer [open-resource parse-int split-by-comma split-whitespace transpose]]))
 
 (def input-file "day_04.txt")
 
-(def data (let [split-by-comma #(str/split % #",")
-                lines (->> input-file open-resource)]
+(def data (let [lines (->> input-file open-resource)]
             {:numbers (->> lines
                            first
                            split-by-comma

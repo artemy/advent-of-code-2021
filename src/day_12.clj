@@ -1,6 +1,6 @@
 (ns day_12
   (:require [clojure.string :as str]
-            [utils :refer [flatten-first open-resource]]))
+            [utils :refer [open-resource]]))
 
 (def input-file "day_12.txt")
 

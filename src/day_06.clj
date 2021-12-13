@@ -1,11 +1,9 @@
 (ns day_06
-  (:require [clojure.string :as str]
-            [utils :refer [map-keys map-vals open-resource parse-int]]))
+  (:require [utils :refer [map-keys map-vals open-resource parse-int split-by-comma]]))
 
 (def input-file "day_06.txt")
 
-(def data (let [split-by-comma #(str/split % #",")]
-            (->> input-file open-resource first split-by-comma (map parse-int))))
+(def data (->> input-file open-resource first split-by-comma (map parse-int)))
 
 (defn part-01 [input days]
   (let [merge-overlapping-ages (fn [m]
