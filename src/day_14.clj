@@ -1,6 +1,6 @@
 (ns day_14
   (:require [clojure.string :as str]
-            [utils :refer [open-resource parse-int split-by-comma]]))
+            [utils :refer [open-resource]]))
 
 (def input-file "day_14.txt")
 
