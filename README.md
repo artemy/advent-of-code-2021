@@ -25,6 +25,7 @@
 - Day 19
 - [Day 20](src/day_20.clj)
 - [Day 21](src/day_21.clj)
+- [Day 22](src/day_22.clj)
 
 ## License
 
