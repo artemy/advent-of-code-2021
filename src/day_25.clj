@@ -1,6 +1,5 @@
 (ns day_25
-  (:require [clojure.data.priority-map :refer [priority-map]]
-            [utils :refer [open-resource parse-int transpose]]
+  (:require [utils :refer [open-resource]]
             [clojure.string :as str]))
 
 (def input-file "day_25.txt")
@@ -67,5 +66,5 @@
        second))
 
 (defn -main [& _]
-  (println "Day 22:")
+  (println "Day 25:")
   (println "\t-> Part 1: " (part-01 data)))
