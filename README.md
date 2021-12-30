@@ -22,7 +22,7 @@
 - [Day 16](src/day_16.clj)
 - [Day 17](src/day_17.clj)
 - [Day 18](src/day_18.clj)
-- Day 19
+- [Day 19](src/day_19.clj)
 - [Day 20](src/day_20.clj)
 - [Day 21](src/day_21.clj)
 - [Day 22](src/day_22.clj)
